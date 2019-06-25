@@ -1,6 +1,7 @@
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.gl2.GLUT;
 
 public class Test{
 
@@ -13,12 +14,8 @@ public class Test{
         GLCapabilities caps = new GLCapabilities(glp);
 
         window = GLWindow.create(caps);
-        window.setSize(800,800);
-        window.setResizable(false);
-
-        window = GLWindow.create(caps);
-        window.setSize(800,800);
-        window.setResizable(false);
+        window.setSize(1200,600);
+        window.setResizable(true);
         window.addGLEventListener(new EventListener());
         window.setVisible(true);
         FPSAnimator animator = new FPSAnimator(window,60);
