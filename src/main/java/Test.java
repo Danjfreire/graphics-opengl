@@ -14,7 +14,7 @@ public class Test{
         GLCapabilities caps = new GLCapabilities(glp);
 
         window = GLWindow.create(caps);
-        window.setSize(1200,600);
+        window.setSize(500,500);
         window.setResizable(true);
         window.addGLEventListener(new EventListener());
         window.setVisible(true);
