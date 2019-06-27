@@ -21,7 +21,7 @@ public class EventListener implements GLEventListener {
     private void loadVertices() {
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader("./src/main/input/triangulo.BYU"));
+            reader = new BufferedReader(new FileReader("./src/main/input/vaso.BYU"));
             String line = reader.readLine();
             String[] line1 = line.split(" ");
             int vertNum = Integer.parseInt(line1[0]);
@@ -76,17 +76,17 @@ public class EventListener implements GLEventListener {
         GLUT glut = new GLUT();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glLoadIdentity();
-        glu.gluLookAt(0,0,10,0,0,0,0,1,0);
-        gl.glScalef(1,2,1);
+        glu.gluLookAt(0,0,800,0,0,0,0,1,0);
+//        gl.glScalef(1,2,1);
 
-//        gl.glDrawElements(GL.GL_TRIANGLES,3,GL.GL_UNSIGNED_INT,this.indices);
-        gl.glDrawArrays(GL.GL_TRIANGLES, 0,triangulos.length);
+        gl.glDrawElements(GL.GL_TRIANGLE_STRIP,triangulos.length,GL.GL_UNSIGNED_INT,this.indices);
+//        gl.glDrawArrays(GL.GL_POINTS, 0,triangulos.length);
 //        gl.glBegin(GL.GL_TRIANGLES);
 //            gl.glVertex3f(vertices[0],vertices[1],vertices[2]);
 //            gl.glVertex3f(vertices[3],vertices[4],vertices[5]);
 //            gl.glVertex3f(vertices[6],vertices[7],vertices[8]);
 //        gl.glEnd();
-        gl.glFlush();
+//        gl.glFlush();
     }
 
     @Override
@@ -95,7 +95,7 @@ public class EventListener implements GLEventListener {
         gl2.glViewport(0,0, width, height);
         gl2.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
         gl2.glLoadIdentity();
-        gl2.glFrustum(-1,1,-1,1,1.5,20);
+        gl2.glFrustum(-1,1,1,-1,1.5,1000);
         gl2.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
     }
 
@@ -124,7 +124,8 @@ public class EventListener implements GLEventListener {
 
     @Override
     public void dispose(GLAutoDrawable drawable) {
-
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glDisableClientState(GLPointerFunc.GL_VERTEX_ARRAY);
     }
 
 }
