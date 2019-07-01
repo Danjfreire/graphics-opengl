@@ -3,6 +3,7 @@ import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.fixedfunc.GLPointerFunc;
 import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.gl2.GLUgl2;
 import com.jogamp.opengl.util.gl2.GLUT;
 import com.sun.scenario.effect.impl.BufferUtil;
 
@@ -21,7 +22,7 @@ public class EventListener implements GLEventListener {
     private void loadVertices() {
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader("./src/main/input/vaso.BYU"));
+            reader = new BufferedReader(new FileReader("./src/main/input/calice2.BYU"));
             String line = reader.readLine();
             String[] line1 = line.split(" ");
             int vertNum = Integer.parseInt(line1[0]);
@@ -32,7 +33,7 @@ public class EventListener implements GLEventListener {
 
             int vertexIterator = 0;
             int triangleIterator = 0;
-
+            
             int aux = 0;
             String[] splitLine;
             line = reader.readLine();
@@ -65,7 +66,8 @@ public class EventListener implements GLEventListener {
     public void init(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
         gl.glClearColor(0,0,0,1);
-        gl.glShadeModel(GLLightingFunc.GL_FLAT);
+//        gl.glEnable(GL.GL_DEPTH_TEST);
+        gl.glShadeModel(GLLightingFunc.GL_SMOOTH);
         setupVertex(gl);
     }
 
@@ -76,26 +78,33 @@ public class EventListener implements GLEventListener {
         GLUT glut = new GLUT();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glLoadIdentity();
-        glu.gluLookAt(0,0,800,0,0,0,0,1,0);
-//        gl.glScalef(1,2,1);
+        glu.gluLookAt(0,-500,1500,0,0,0,0,-1,0);
 
-        gl.glDrawElements(GL.GL_TRIANGLE_STRIP,triangulos.length,GL.GL_UNSIGNED_INT,this.indices);
+//        gl.glScalef(1,1,1);
 //        gl.glDrawArrays(GL.GL_POINTS, 0,triangulos.length);
+        gl.glDrawElements(GL.GL_POINTS,triangulos.length,GL.GL_UNSIGNED_INT,this.indices);
+//        gl.glLoadIdentity();
+
 //        gl.glBegin(GL.GL_TRIANGLES);
-//            gl.glVertex3f(vertices[0],vertices[1],vertices[2]);
-//            gl.glVertex3f(vertices[3],vertices[4],vertices[5]);
-//            gl.glVertex3f(vertices[6],vertices[7],vertices[8]);
+//        gl.glColor3f(1, 0, 0);
+//        gl.glVertex2f(5, 5);
+//        gl.glColor3f(0, 1, 0);
+//        gl.glVertex2f(25, 5);
+//        gl.glColor3f(0, 0, 1);
+//        gl.glVertex2f(5, 25);
 //        gl.glEnd();
-//        gl.glFlush();
+
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         GL2 gl2 = drawable.getGL().getGL2();
-        gl2.glViewport(0,0, width, height);
+        GLU glu = new GLUgl2();
+//        gl2.glViewport(0,0, width, height);
         gl2.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
         gl2.glLoadIdentity();
-        gl2.glFrustum(-1,1,1,-1,1.5,1000);
+        glu.gluPerspective(45, width/height,5, 10000);
+//        gl2.glFrustum(-1,1,1,-1,1.5,1000);
         gl2.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
     }
 
