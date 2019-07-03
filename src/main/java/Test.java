@@ -18,7 +18,7 @@ public class Test{
         window.setResizable(true);
         window.addGLEventListener(new EventListener());
         window.setVisible(true);
-        FPSAnimator animator = new FPSAnimator(window,60);
+        FPSAnimator animator = new FPSAnimator(window,30);
         animator.start();
     }
 }

@@ -33,7 +33,7 @@ public class EventListener implements GLEventListener {
 
             int vertexIterator = 0;
             int triangleIterator = 0;
-            
+
             int aux = 0;
             String[] splitLine;
             line = reader.readLine();
@@ -47,11 +47,11 @@ public class EventListener implements GLEventListener {
                     vertices[vertexIterator] = Float.parseFloat(splitLine[2]);
                     vertexIterator++;
                 } else {
-                    triangulos[triangleIterator] = Integer.parseInt(splitLine[0]);
+                    triangulos[triangleIterator] = Integer.parseInt(splitLine[0]) -1;
                     triangleIterator++;
-                    triangulos[triangleIterator] = Integer.parseInt(splitLine[1]);
+                    triangulos[triangleIterator] = Integer.parseInt(splitLine[1]) -1;
                     triangleIterator++;
-                    triangulos[triangleIterator] = Integer.parseInt(splitLine[2]);
+                    triangulos[triangleIterator] = Integer.parseInt(splitLine[2]) -1;
                     triangleIterator++;
                 }
                 aux++;
@@ -77,12 +77,14 @@ public class EventListener implements GLEventListener {
         GLU glu = new GLU();
         GLUT glut = new GLUT();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
+//        gl.glClear(GL.GL_DEPTH_BITS);
         gl.glLoadIdentity();
-        glu.gluLookAt(0,-500,1500,0,0,0,0,-1,0);
+        glu.gluLookAt(0,0,1500,0,0,0,0,-1,0);
 
 //        gl.glScalef(1,1,1);
 //        gl.glDrawArrays(GL.GL_POINTS, 0,triangulos.length);
-        gl.glDrawElements(GL.GL_POINTS,triangulos.length,GL.GL_UNSIGNED_INT,this.indices);
+        gl.glDrawElements(GL.GL_TRIANGLES,triangulos.length,GL.GL_UNSIGNED_INT,this.indices);
+        gl.glFlush();
 //        gl.glLoadIdentity();
 
 //        gl.glBegin(GL.GL_TRIANGLES);
