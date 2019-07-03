@@ -14,11 +14,11 @@ public class Test{
         GLCapabilities caps = new GLCapabilities(glp);
 
         window = GLWindow.create(caps);
-        window.setSize(800,600);
+        window.setSize(600,600);
         window.setResizable(true);
         window.addGLEventListener(new EventListener());
         window.setVisible(true);
-        FPSAnimator animator = new FPSAnimator(window,30);
+        FPSAnimator animator = new FPSAnimator(window,60);
         animator.start();
     }
 }
