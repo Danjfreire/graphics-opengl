@@ -33,6 +33,11 @@ public class CameraParams {
         return C.toArray();
     }
 
+    public void moveLeft(){
+        this.C.setX(this.C.getX() - 100);
+    }
+
+
     public float[] getN() {
         return N.toArray();
     }

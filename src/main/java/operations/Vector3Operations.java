@@ -121,7 +121,7 @@ public class Vector3Operations {
     }
 
     public Vector3 getU(Vector3 n, Vector3 v) {
-//        Vector3 orthoV = this.orthogonalize(v,n);
+        Vector3 orthoV = this.orthogonalize(v,n);
         Vector3 u = this.crossProduct(n, v);
         return u;
     }
